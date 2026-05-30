@@ -67,8 +67,7 @@ func TestIntegrationIdentity(t *testing.T) {
           "spec": {
             "email": "staff@Org1",
             "title": "staff"
-          },
-          "status": {}
+          }
         }
       ]
     }`, found)
@@ -85,40 +84,20 @@ func TestIntegrationIdentity(t *testing.T) {
 		found = teamClient.SpecJSON(rsp)
 		require.JSONEq(t, `[
 			{
-				"disabled": false,
 				"email": "admin@localhost",
-				"emailVerified": false,
-				"grafanaAdmin": true,
-				"login": "admin",
-				"name": "",
-				"provisioned": false
+				"login": "admin"
 			},
 			{
-				"disabled": false,
 				"email": "admin2-1",
-				"emailVerified": false,
-				"grafanaAdmin": true,
-				"login": "admin2-1",
-				"name": "",
-				"provisioned": false
+				"login": "admin2-1"
 			},
 			{
-				"disabled": false,
 				"email": "editor-1",
-				"emailVerified": false,
-				"grafanaAdmin": false,
-				"login": "editor-1",
-				"name": "",
-				"provisioned": false
+				"login": "editor-1"
 			},
 			{
-				"disabled": false,
 				"email": "viewer-1",
-				"emailVerified": false,
-				"grafanaAdmin": false,
-				"login": "viewer-1",
-				"name": "",
-				"provisioned": false
+				"login": "viewer-1"
 			}
 		]`, found)
 
@@ -135,40 +114,20 @@ func TestIntegrationIdentity(t *testing.T) {
 		found = teamClient.SpecJSON(rsp)
 		require.JSONEq(t, `[
 			{
-				"disabled": false,
 				"email": "admin2-1",
-				"emailVerified": false,
-				"grafanaAdmin": true,
-				"login": "admin2-1",
-				"name": "",
-				"provisioned": false
+				"login": "admin2-1"
 			},
 			{
-				"disabled": false,
 				"email": "admin2-2",
-				"emailVerified": false,
-				"grafanaAdmin": false,
-				"login": "admin2-2",
-				"name": "",
-				"provisioned": false
+				"login": "admin2-2"
 			},
 			{
-				"disabled": false,
 				"email": "editor-2",
-				"emailVerified": false,
-				"grafanaAdmin": false,
-				"login": "editor-2",
-				"name": "",
-				"provisioned": false
+				"login": "editor-2"
 			},
 			{
-				"disabled": false,
 				"email": "viewer-2",
-				"emailVerified": false,
-				"grafanaAdmin": false,
-				"login": "viewer-2",
-				"name": "",
-				"provisioned": false
+				"login": "viewer-2"
 			}
 		]`, found)
 	})

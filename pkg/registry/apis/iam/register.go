@@ -2,7 +2,6 @@ package iam
 
 import (
 	"context"
-	"maps"
 	"strings"
 
 	"github.com/prometheus/client_golang/prometheus"
@@ -150,12 +149,18 @@ func (b *IdentityAccessManagementAPIBuilder) UpdateAPIGroupInfo(apiGroupInfo *ge
 }
 
 func (b *IdentityAccessManagementAPIBuilder) GetOpenAPIDefinitions() common.GetOpenAPIDefinitions {
-	return func(rc common.ReferenceCallback) map[string]common.OpenAPIDefinition {
-		dst := legacyiamv0.GetOpenAPIDefinitions(rc)
-		maps.Copy(dst, iamv0.GetOpenAPIDefinitions(rc))
-
-		return dst
+	defs := legacyiamv0.GetOpenAPIDefinitions
+	if b.enableAuthZApis {
+		defs = func(ref common.ReferenceCallback) map[string]common.OpenAPIDefinition {
+			def1 := legacyiamv0.GetOpenAPIDefinitions(ref)
+			def2 := iamv0.GetOpenAPIDefinitions(ref)
+			for k, v := range def2 {
+				def1[k] = v
+			}
+			return def1
+		}
 	}
+	return defs
 }
 
 func (b *IdentityAccessManagementAPIBuilder) PostProcessOpenAPI(oas *spec3.OpenAPI) (*spec3.OpenAPI, error) {

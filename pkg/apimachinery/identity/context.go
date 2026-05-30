@@ -115,10 +115,9 @@ var serviceIdentityPermissions = getWildcardPermissions(
 	"datasources:delete",
 	"alert.provisioning:write",
 	"alert.provisioning.secrets:read",
-	"users:read",           // accesscontrol.ActionUsersRead,
-	"org.users:read",       // accesscontrol.ActionOrgUsersRead,
-	"teams:read",           // accesscontrol.ActionTeamsRead,
-	"serviceaccounts:read", // serviceaccounts.ActionRead,
+	"users:read",     // accesscontrol.ActionUsersRead,
+	"org.users:read", // accesscontrol.ActionOrgUsersRead,
+	"teams:read",     // accesscontrol.ActionTeamsRead,
 )
 
 var serviceIdentityTokenPermissions = getTokenPermissions(

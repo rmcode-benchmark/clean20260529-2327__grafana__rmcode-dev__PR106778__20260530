@@ -5,9 +5,8 @@ import (
 	"strconv"
 
 	authlib "github.com/grafana/authlib/types"
-	iamv0alpha1 "github.com/grafana/grafana/apps/iam/pkg/apis/iam/v0alpha1"
 	"github.com/grafana/grafana/pkg/apimachinery/identity"
-	legacyiamv0 "github.com/grafana/grafana/pkg/apis/iam/v0alpha1"
+	iamv0 "github.com/grafana/grafana/pkg/apis/iam/v0alpha1"
 	"github.com/grafana/grafana/pkg/services/apiserver/endpoints/request"
 	"github.com/grafana/grafana/pkg/services/team"
 )
@@ -21,19 +20,11 @@ func OptionalFormatInt(num int64) string {
 	return ""
 }
 
-func MapTeamPermission(p team.PermissionType) iamv0alpha1.TeamBindingTeamPermission {
+func MapTeamPermission(p team.PermissionType) iamv0.TeamPermission {
 	if p == team.PermissionTypeAdmin {
-		return iamv0alpha1.TeamBindingTeamPermissionAdmin
+		return iamv0.TeamPermissionAdmin
 	} else {
-		return iamv0alpha1.TeamBindingTeamPermissionMember
-	}
-}
-
-func MapUserTeamPermission(p team.PermissionType) legacyiamv0.TeamPermission {
-	if p == team.PermissionTypeAdmin {
-		return legacyiamv0.TeamPermissionAdmin
-	} else {
-		return legacyiamv0.TeamPermissionMember
+		return iamv0.TeamPermissionMember
 	}
 }
 
